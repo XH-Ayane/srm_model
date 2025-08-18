@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.srm.srm_model.mapper.PurchaseRequirementMapper">
+
+    <!-- 新增采购需求 -->
+    <insert id="insert" parameterType="com.srm.srm_model.entity.PurchaseRequirement">
+        INSERT INTO purchase_requirement (
+            product_name, specification, quantity, delivery_date,
+            budget_max, create_time
+        ) VALUES (
+                     #{productName}, #{specification}, #{quantity}, #{deliveryDate},
+                     #{budgetMax}, #{createTime}
+                 )
+    </insert>
+
+    <!-- 更新采购需求 -->
+    <update id="update" parameterType="com.srm.srm_model.entity.PurchaseRequirement">
+        UPDATE purchase_requirement
+        <set>
+            product_name = #{productName},
+            specification = #{specification},
+            quantity = #{quantity},
+            delivery_date = #{deliveryDate},
+            budget_max = #{budgetMax}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.PurchaseRequirement">
+        SELECT * FROM purchase_requirement WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="selectAll" resultType="com.srm.srm_model.entity.PurchaseRequirement">
+        SELECT * FROM purchase_requirement ORDER BY create_time DESC
+    </select>
+</mapper>

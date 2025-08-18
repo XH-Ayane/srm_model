@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.srm.srm_model.mapper.TenderMapper">
+
+    <!-- 新增招标 -->
+    <insert id="insert" parameterType="com.srm.srm_model.entity.Tender">
+        INSERT INTO tender (
+            requirement_id, title, description, start_time,
+            end_time, status, create_time
+        ) VALUES (
+                     #{requirementId}, #{title}, #{description}, #{startTime},
+                     #{endTime}, #{status}, #{createTime}
+                 )
+    </insert>
+
+    <!-- 更新招标 -->
+    <update id="update" parameterType="com.srm.srm_model.entity.Tender">
+        UPDATE tender
+        <set>
+            title = #{title},
+            description = #{description},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            status = #{status}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.Tender">
+        SELECT * FROM tender WHERE id = #{id}
+    </select>
+
+    <!-- 根据采购需求ID查询 -->
+    <select id="selectByRequirementId" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.Tender">
+        SELECT * FROM tender WHERE requirement_id = #{requirementId}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="selectAll" resultType="com.srm.srm_model.entity.Tender">
+        SELECT * FROM tender ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据状态查询 -->
+    <select id="selectByStatus" parameterType="java.lang.Integer" resultType="com.srm.srm_model.entity.Tender">
+        SELECT * FROM tender WHERE status = #{status} ORDER BY create_time DESC
+    </select>
+</mapper>

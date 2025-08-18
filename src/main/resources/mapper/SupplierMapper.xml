@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.srm.srm_model.mapper.SupplierMapper">
+
+    <!-- 新增供应商 -->
+    <insert id="insert" parameterType="com.srm.srm_model.entity.Supplier">
+        INSERT INTO supplier (
+            name, contact_person, phone, email, country, category,
+            status, create_time, update_time
+        ) VALUES (
+                     #{name}, #{contactPerson}, #{phone}, #{email}, #{country}, #{category},
+                     #{status}, #{createTime}, #{updateTime}
+                 )
+    </insert>
+
+    <!-- 更新供应商 -->
+    <update id="update" parameterType="com.srm.srm_model.entity.Supplier">
+        UPDATE supplier
+        <set>
+            name = #{name},
+            contact_person = #{contactPerson},
+            phone = #{phone},
+            email = #{email},
+            country = #{country},
+            category = #{category},
+            status = #{status},
+            update_time = #{updateTime}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有 -->
+    <select id="selectAll" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据状态查询 -->
+    <select id="selectByStatus" parameterType="java.lang.Integer" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE status = #{status} ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据分类ID查询 -->
+    <select id="selectByCategoryId" parameterType="java.lang.String" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE category = #{categoryId} ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据国家查询 -->
+    <select id="selectByCountry" parameterType="java.lang.String" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE country = #{country} ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据分类和国家查询 -->
+    <select id="selectByCategoryIdAndCountry" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE category = #{categoryId} AND country = #{country} ORDER BY create_time DESC
+    </select>
+
+    <!-- 查询所有供应商分类 -->
+    <select id="selectAllCategories" resultType="java.lang.String">
+    SELECT DISTINCT category FROM supplier WHERE category IS NOT NULL AND category != '' ORDER BY category ASC
+  </select>
+
+  <select id="selectAllCountries" resultType="java.lang.String">
+    SELECT DISTINCT country FROM supplier WHERE country IS NOT NULL AND country != '' ORDER BY country ASC
+  </select>
+</mapper>

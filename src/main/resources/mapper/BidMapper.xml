@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.srm.srm_model.mapper.BidMapper">
+
+    <!-- 新增投标 -->
+    <insert id="insert" parameterType="com.srm.srm_model.entity.Bid">
+        INSERT INTO bid (
+            tender_id, supplier_id, price, delivery_days, create_time
+        ) VALUES (
+                     #{tenderId}, #{supplierId}, #{price}, #{deliveryDays}, #{createTime}
+                 )
+    </insert>
+
+    <!-- 更新投标 -->
+    <update id="update" parameterType="com.srm.srm_model.entity.Bid">
+        UPDATE bid
+        <set>
+            price = #{price},
+            delivery_days = #{deliveryDays},
+            create_time = #{createTime}
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.Bid">
+        SELECT * FROM bid WHERE id = #{id}
+    </select>
+
+    <!-- 根据招标ID查询所有投标 -->
+    <select id="selectByTenderId" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.Bid">
+        SELECT * FROM bid
+        WHERE tender_id = #{tenderId}
+        ORDER BY price ASC, create_time DESC
+    </select>
+
+    <!-- 根据招标ID和供应商ID查询 -->
+    <select id="selectByTenderAndSupplier" resultType="com.srm.srm_model.entity.Bid">
+        SELECT * FROM bid
+        WHERE tender_id = #{tenderId}
+          AND supplier_id = #{supplierId}
+    </select>
+
+    <!-- 查询最低报价的投标 -->
+    <select id="selectMinPriceByTenderId" parameterType="java.lang.Long" resultType="com.srm.srm_model.entity.Bid">
+        SELECT * FROM bid
+        WHERE tender_id = #{tenderId}
+        ORDER BY price ASC
+            LIMIT 1
+    </select>
+</mapper>

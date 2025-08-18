@@ -1,0 +1,32 @@
+spring:
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/srm_db?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 03101577po
+
+  # Redis配置
+  redis:
+    host: localhost
+    port: 6379
+    password:  # 如果没设置密码就空着
+    database: 0  # 默认数据库
+
+# MyBatis配置
+mybatis:
+  mapper-locations: classpath:mapper/*.xml  # 指定Mapper.xml位置
+  type-aliases-package: com.srm.system.entity  # 实体类包路径
+  configuration:
+    map-underscore-to-camel-case: true  # 下划线转驼峰命名
+# 分页插件配置
+pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+
+# 日志配置（方便调试）
+logging:
+  level:
+    com.srm.system.mapper: debug  # 打印MyBatis执行的SQL
+
