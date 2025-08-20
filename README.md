@@ -1,15 +1,12 @@
-# 跨境电商SRM系统
-# Cross-border E-commerce SRM System
+# 跨境电商SRM系统 Cross-border E-commerce SRM System
 
-## 项目简介
-## Project Introduction
+## 项目简介 Project Introduction
 
 本项目是一个专为跨境电商场景设计的供应商关系管理(SRM)系统，聚焦于简化用户认证环节，专注实现**供应商管理**和**寻源招标**两大核心模块。系统采用现代化技术栈开发，旨在帮助采购方高效管理供应商资源，规范招标流程，提升跨境采购效率。
 
 This project is a Supplier Relationship Management (SRM) system designed specifically for cross-border e-commerce scenarios. It simplifies user authentication and focuses on implementing two core modules: **Supplier Management** and **Sourcing & Tendering**. Developed with modern technology stack, the system aims to help buyers efficiently manage supplier resources, standardize tendering processes, and improve cross-border procurement efficiency.
 
-## 技术栈
-## Technology Stack
+## 技术栈 Technology Stack
 
 - **后端**：Spring Boot + MyBatis + Redis
 - **前端**：Vue.js (vite) + Element Plus
@@ -25,11 +22,9 @@ This project is a Supplier Relationship Management (SRM) system designed specifi
 - **Server**: Nginx
 - **Build Tool**: Maven
 
-## 核心功能模块
-## Core Function Modules
+## 核心功能模块 Core Function Modules
 
-### 1. 供应商管理模块
-### 1. Supplier Management Module
+### 1. 供应商管理模块 Supplier Management Module
 
 - **供应商信息管理**：录入、编辑、查询供应商基本信息（名称、联系人、电话、邮箱、所在国家/城市、主营品类）
 - **供应商审核**：查看待审核供应商列表，执行审核通过/驳回操作
@@ -41,8 +36,7 @@ This project is a Supplier Relationship Management (SRM) system designed specifi
 - **Supplier Filtering**: Search suppliers by name, country, main category, etc., with pagination support
 - **Status Management**: Set supplier status (pending review/cooperating/suspended)
 
-### 2. 寻源与招标管理模块
-### 2. Sourcing and Tendering Management Module
+### 2. 寻源与招标管理模块 Sourcing and Tendering Management Module
 
 - **采购需求管理**：创建采购需求（产品名称、规格、数量、期望交货期、预算范围）
 - **招标管理**：发布招标信息，选择参与招标的供应商，查看招标进度
@@ -54,8 +48,7 @@ This project is a Supplier Relationship Management (SRM) system designed specifi
 - **Bid Management**: Suppliers submit bids and delivery commitments, with the ability to modify bids before the deadline
 - **Tender Result Processing**: Display all valid bids, sort by price, and select winning suppliers
 
-## 项目结构
-## Project Structure
+## 项目结构 Project Structure
 
 ```
 srm_model/
@@ -79,11 +72,9 @@ srm_fase/
 └── vite.config.js
 ```
 
-## 如何运行
-## How to Run
+## 如何运行 How to Run
 
-### 后端运行
-### Backend Run
+### 后端运行 Backend Run
 
 1. 确保已安装JDK 11+和Maven
 2. 克隆代码仓库
@@ -105,8 +96,7 @@ cd srm_model
 mvn spring-boot:run
 ```
 
-### 前端运行
-### Frontend Run
+### 前端运行 Frontend Run
 
 1. 确保已安装Node.js 14+
 2. 进入前端目录：
@@ -126,8 +116,7 @@ npm install
 npm run dev
 ```
 
-## API文档
-## API Documentation
+## API文档 API Documentation
 
 启动后端服务后，可访问以下地址查看API文档：
 - Swagger UI: http://localhost:8080/swagger-ui.html
@@ -137,8 +126,7 @@ After starting the backend service, you can access the following addresses to vi
 - Swagger UI: http://localhost:8080/swagger-ui.html
 - Enhanced Documentation: http://localhost:8080/doc.html
 
-## 数据库设计
-## Database Design
+## 数据库设计 Database Design
 
 系统主要包含以下核心表：
 - `supplier`：供应商信息表
@@ -154,8 +142,7 @@ The system mainly includes the following core tables:
 - `tender`: Tender table
 - `bid`: Bid record table
 
-## 贡献指南
-## Contribution Guidelines
+## 贡献指南 Contribution Guidelines
 
 1.  Fork 本仓库
 2.  创建特性分支 (`git checkout -b feature/fooBar`)
@@ -169,11 +156,12 @@ The system mainly includes the following core tables:
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
 
-## 版权信息
-## Copyright Information
+## 版权信息 Copyright Information
 
 © 2025 跨境电商SRM系统开发团队. 保留所有权利.
+
 © 2025 XHAYANE. 保留所有权利.
 
 © 2025 Cross-border E-commerce SRM System Development Team. All rights reserved.
+
 © 2025 XHAYANE. All rights reserved.
