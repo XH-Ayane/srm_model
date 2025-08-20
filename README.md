@@ -159,9 +159,4 @@ The system mainly includes the following core tables:
 ## 版权信息 Copyright Information
 
 © 2025 跨境电商SRM系统开发团队. 保留所有权利.
-
-© 2025 XHAYANE. 保留所有权利.
-
 © 2025 Cross-border E-commerce SRM System Development Team. All rights reserved.
-
-© 2025 XHAYANE. All rights reserved.
