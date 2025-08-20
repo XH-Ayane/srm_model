@@ -67,4 +67,23 @@
   <select id="selectAllCountries" resultType="java.lang.String">
     SELECT DISTINCT country FROM supplier WHERE country IS NOT NULL AND country != '' ORDER BY country ASC
   </select>
+    <!-- 根据合作状态查询 -->
+    <select id="selectByCooperationStatus" parameterType="java.lang.Integer" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE cooperation_status = #{cooperationStatus} ORDER BY create_time DESC
+    </select>
+
+    <!-- 根据评级范围查询 -->
+    <select id="selectByRatingRange" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier WHERE rating BETWEEN #{minRating} AND #{maxRating} ORDER BY rating DESC
+    </select>
+    <!-- 优化分页查询 -->
+    <select id="selectByPage" resultType="com.srm.srm_model.entity.Supplier">
+        SELECT * FROM supplier
+        <where>
+            <if test="status != null">status = #{status}</if>
+            <if test="category != null">AND category = #{category}</if>
+        </where>
+        ORDER BY id DESC
+        LIMIT #{offset}, #{pageSize}
+    </select>
 </mapper>

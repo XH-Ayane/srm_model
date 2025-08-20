@@ -44,4 +44,45 @@ public interface SupplierService {
      * @return 国家列表
      */
     List<String> getAllCountries();
+
+    // 新增方法
+    /**
+     * 更新供应商评级
+     * @param id 供应商ID
+     * @param rating 评级(1-5星)
+     * @return 影响行数
+     */
+    int updateSupplierRating(Long id, Integer rating);
+
+    /**
+     * 更新供应商合作状态
+     * @param id 供应商ID
+     * @param status 合作状态: active-活跃, inactive-暂停, terminated-终止
+     * @return 影响行数
+     */
+    int updateCooperationStatus(Long id, String status);
+
+    /**
+     * 上传供应商资质文件
+     * @param id 供应商ID
+     * @param fileUrl 文件路径
+     * @return 影响行数
+     */
+    int uploadQualificationFile(Long id, String fileUrl);
+
+    /**
+     * 根据合作状态查询供应商
+     * @param status 合作状态
+     * @return 供应商列表
+     */
+    List<Supplier> getSuppliersByCooperationStatus(String status);
+
+    /**
+     * 根据评级查询供应商
+     * @param minRating 最小评级
+     * @param maxRating 最大评级
+     * @return 供应商列表
+     */
+    List<Supplier> getSuppliersByRating(Integer minRating, Integer maxRating);
+
 }

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+  用户Mapper映射文件
+  定义用户数据访问接口的SQL实现
+-->
+<mapper namespace="com.srm.srm_model.mapper.UserMapper">
+
+    <!-- 用户结果映射 -->
+    <resultMap id="UserResultMap" type="com.srm.srm_model.entity.User">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="email" property="email"/>
+        <result column="role" property="role"/>
+        <result column="enabled" property="enabled"/>
+    </resultMap>
+
+    <!-- 根据用户名查询用户 -->
+    <select id="selectByUsername" resultMap="UserResultMap">
+        SELECT * FROM user WHERE username = #{username}
+    </select>
+
+    <!-- 根据ID查询用户 -->
+    <select id="selectById" resultMap="UserResultMap">
+        SELECT * FROM user WHERE id = #{id}
+    </select>
+
+    <!-- 查询所有用户 -->
+    <select id="selectAll" resultMap="UserResultMap">
+        SELECT * FROM user
+    </select>
+
+    <!-- 插入用户 -->
+    <insert id="insert" parameterType="com.srm.srm_model.entity.User">
+        INSERT INTO user (username, password, email, role, enabled)
+        VALUES (#{username}, #{password}, #{email}, #{role}, #{enabled})
+    </insert>
+
+    <!-- 更新用户 -->
+    <update id="update" parameterType="com.srm.srm_model.entity.User">
+        UPDATE user
+        SET username = #{username},
+            password = #{password},
+            email = #{email},
+            role = #{role},
+            enabled = #{enabled}
+        WHERE id = #{id}
+    </update>
+
+    <!-- 根据ID删除用户 -->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        DELETE FROM user WHERE id = #{id}
+    </delete>
+</mapper>

@@ -16,6 +16,7 @@
 
 package com.srm.srm_model.demos.web;
 
+import com.srm.srm_model.entity.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,16 +41,15 @@ public class BasicController {
     @ResponseBody
     public User user() {
         User user = new User();
-        user.setName("theonefx");
-        user.setAge(666);
+        user.setUsername("theonefx");
         return user;
     }
 
-    // http://127.0.0.1:8080/save_user?name=newName&age=11
+    // http://127.0.0.1:8080/save_user?username=newName
     @RequestMapping("/save_user")
     @ResponseBody
     public String saveUser(User u) {
-        return "user will save: name=" + u.getName() + ", age=" + u.getAge();
+        return "user will save: username=" + u.getUsername();
     }
 
     // http://127.0.0.1:8080/html
@@ -59,9 +59,7 @@ public class BasicController {
     }
 
     @ModelAttribute
-    public void parseUser(@RequestParam(name = "name", defaultValue = "unknown user") String name
-            , @RequestParam(name = "age", defaultValue = "12") Integer age, User user) {
-        user.setName("zhangsan");
-        user.setAge(18);
+    public void parseUser(@RequestParam(name = "username", defaultValue = "unknown user") String username, User user) {
+        user.setUsername(username);
     }
 }

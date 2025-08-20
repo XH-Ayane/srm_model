@@ -3,15 +3,49 @@ package com.srm.srm_model.config;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.cache.CacheManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.cache.RedisCacheConfiguration;
+import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
+import java.time.Duration;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.connection.RedisPassword;
+import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+
 @Configuration
 public class RedisConfig {
+
+    @Value("${spring.redis.host}")
+    private String redisHost;
+
+    @Value("${spring.redis.port}")
+    private int redisPort;
+
+    @Value("${spring.redis.password:}")
+    private String redisPassword;
+
+    @Value("${spring.redis.database:0}")
+    private int redisDatabase;
+
+    @Bean
+    public RedisConnectionFactory redisConnectionFactory() {
+        RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
+        config.setHostName(redisHost);
+        config.setPort(redisPort);
+        config.setDatabase(redisDatabase);
+        if (!redisPassword.isEmpty()) {
+            config.setPassword(RedisPassword.of(redisPassword));
+        }
+        return new JedisConnectionFactory(config);
+    }
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
@@ -39,5 +73,19 @@ public class RedisConfig {
         template.afterPropertiesSet();
 
         return template;
+    }
+
+    @Bean
+    public CacheManager cacheManager(RedisConnectionFactory factory) {
+        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
+                .entryTtl(Duration.ofHours(1))  // 设置缓存默认过期时间1小时
+                .disableCachingNullValues();  // 不缓存null值
+
+        return RedisCacheManager.builder(factory)
+                .cacheDefaults(config)
+                .withCacheConfiguration("userCache", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(10)))
+                .withCacheConfiguration("productCache", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(30)))
+                .withCacheConfiguration("categories", RedisCacheConfiguration.defaultCacheConfig().entryTtl(Duration.ofMinutes(1)))
+                .build();
     }
 }

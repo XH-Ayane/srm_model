@@ -38,4 +38,10 @@ public interface SupplierMapper {
      * @return
      */
     List<String> selectAllCountries();
+
+    // 根据合作状态查询供应商
+    List<Supplier> selectByCooperationStatus(Integer cooperationStatus);
+
+    // 根据评级范围查询供应商
+    List<Supplier> selectByRatingRange(Integer minRating, Integer maxRating);
 }
